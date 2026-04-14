@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personality Detection</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+        }
+
+        .container {
+            width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .value {
+            color: blue;
+            margin-left: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            width: 100%;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Personality Detection System</h1>
+
+    <form action="/predict" method="post">
+
+        <!-- ALL 26 FEATURES -->
+
+        <div class="field"><label>Social Energy: <span id="v1">5</span></label>
+        <input type="range" name="social_energy" min="0" max="10" value="5" oninput="v1.innerText=this.value"></div>
+
+        <div class="field"><label>Alone Time Preference: <span id="v2">5</span></label>
+        <input type="range" name="alone_time_preference" min="0" max="10" value="5" oninput="v2.innerText=this.value"></div>
+
+        <div class="field"><label>Talkativeness: <span id="v3">5</span></label>
+        <input type="range" name="talkativeness" min="0" max="10" value="5" oninput="v3.innerText=this.value"></div>
+
+        <div class="field"><label>Deep Reflection: <span id="v4">5</span></label>
+        <input type="range" name="deep_reflection" min="0" max="10" value="5" oninput="v4.innerText=this.value"></div>
+
+        <div class="field"><label>Group Comfort: <span id="v5">5</span></label>
+        <input type="range" name="group_comfort" min="0" max="10" value="5" oninput="v5.innerText=this.value"></div>
+
+        <div class="field"><label>Party Liking: <span id="v6">5</span></label>
+        <input type="range" name="party_liking" min="0" max="10" value="5" oninput="v6.innerText=this.value"></div>
+
+        <div class="field"><label>Listening Skill: <span id="v7">5</span></label>
+        <input type="range" name="listening_skill" min="0" max="10" value="5" oninput="v7.innerText=this.value"></div>
+
+        <div class="field"><label>Empathy: <span id="v8">5</span></label>
+        <input type="range" name="empathy" min="0" max="10" value="5" oninput="v8.innerText=this.value"></div>
+
+        <div class="field"><label>Organization: <span id="v9">5</span></label>
+        <input type="range" name="organization" min="0" max="10" value="5" oninput="v9.innerText=this.value"></div>
+
+        <div class="field"><label>Leadership: <span id="v10">5</span></label>
+        <input type="range" name="leadership" min="0" max="10" value="5" oninput="v10.innerText=this.value"></div>
+
+        <div class="field"><label>Risk Taking: <span id="v11">5</span></label>
+        <input type="range" name="risk_taking" min="0" max="10" value="5" oninput="v11.innerText=this.value"></div>
+
+        <div class="field"><label>Public Speaking Comfort: <span id="v12">5</span></label>
+        <input type="range" name="public_speaking_comfort" min="0" max="10" value="5" oninput="v12.innerText=this.value"></div>
+
+        <div class="field"><label>Curiosity: <span id="v13">5</span></label>
+        <input type="range" name="curiosity" min="0" max="10" value="5" oninput="v13.innerText=this.value"></div>
+
+        <div class="field"><label>Routine Preference: <span id="v14">5</span></label>
+        <input type="range" name="routine_preference" min="0" max="10" value="5" oninput="v14.innerText=this.value"></div>
+
+        <div class="field"><label>Excitement Seeking: <span id="v15">5</span></label>
+        <input type="range" name="excitement_seeking" min="0" max="10" value="5" oninput="v15.innerText=this.value"></div>
+
+        <div class="field"><label>Friendliness: <span id="v16">5</span></label>
+        <input type="range" name="friendliness" min="0" max="10" value="5" oninput="v16.innerText=this.value"></div>
+
+        <div class="field"><label>Planning: <span id="v17">5</span></label>
+        <input type="range" name="planning" min="0" max="10" value="5" oninput="v17.innerText=this.value"></div>
+
+        <div class="field"><label>Spontaneity: <span id="v18">5</span></label>
+        <input type="range" name="spontaneity" min="0" max="10" value="5" oninput="v18.innerText=this.value"></div>
+
+        <div class="field"><label>Adventurousness: <span id="v19">5</span></label>
+        <input type="range" name="adventurousness" min="0" max="10" value="5" oninput="v19.innerText=this.value"></div>
+
+        <div class="field"><label>Reading Habit: <span id="v20">5</span></label>
+        <input type="range" name="reading_habit" min="0" max="10" value="5" oninput="v20.innerText=this.value"></div>
+
+        <div class="field"><label>Sports Interest: <span id="v21">5</span></label>
+        <input type="range" name="sports_interest" min="0" max="10" value="5" oninput="v21.innerText=this.value"></div>
+
+        <div class="field"><label>Online Social Usage: <span id="v22">5</span></label>
+        <input type="range" name="online_social_usage" min="0" max="10" value="5" oninput="v22.innerText=this.value"></div>
+
+        <div class="field"><label>Travel Desire: <span id="v23">5</span></label>
+        <input type="range" name="travel_desire" min="0" max="10" value="5" oninput="v23.innerText=this.value"></div>
+
+        <div class="field"><label>Gadget Usage: <span id="v24">5</span></label>
+        <input type="range" name="gadget_usage" min="0" max="10" value="5" oninput="v24.innerText=this.value"></div>
+
+        <div class="field"><label>Work Style Collaborative: <span id="v25">5</span></label>
+        <input type="range" name="work_style_collaborative" min="0" max="10" value="5" oninput="v25.innerText=this.value"></div>
+
+        <div class="field"><label>Decision Speed: <span id="v26">5</span></label>
+        <input type="range" name="decision_speed" min="0" max="10" value="5" oninput="v26.innerText=this.value"></div>
+
+        <button type="submit">Predict Personality</button>
+
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            Prediction: {{ prediction }}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
